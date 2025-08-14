@@ -53,6 +53,19 @@ void dfs(ll vertex, ll par=0){
     }
 }
 
+// Pre-computation using DFS:
+// Subtree Sum & Even or Odd Count for each Node:
+ll subtreeSum[N], evnCnt[N];
+void dfs2(ll vertex, ll par=0){
+    if(vertex%2==0) evnCnt[vertex]++;
+    subtreeSum[vertex] += vertex;
+    for(ll child:adjList[vertex]){
+        if(child==par) continue;
+        dfs2(child, vertex);
+        subtreeSum[vertex] += subtreeSum[child];
+        evnCnt[vertex] += evnCnt[child];
+    }
+}
 
 
 int main(){
@@ -94,11 +107,18 @@ int main(){
     //         dfs(i);
     //     }
     // }
+    
+    /*
     cout<<"start ->"<<" ";
     dfsTraverse(1);
     cout<<nl;
     dfs(1);
     for(int i=1; i<=n; i++){
         cout<<depth[i]<<" "<<height[i]<<nl;
+    }
+    */
+    dfs2(1);  // precomputation for subtreeSum & evnCnt
+    for(int i=1; i<=n; i++){
+        cout<<subtreeSum[i]<<" "<<evnCnt[i]<<nl;
     }
 }
