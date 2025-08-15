@@ -67,6 +67,17 @@ void dfs2(ll vertex, ll par=0){
     }
 }
 
+// This is for find the diameter 
+void dfs3(ll vertex, ll par=-1){
+    for(ll child:adjList[vertex]){
+        if(child == par) continue;
+        depth[child] = depth[vertex]+1;
+        dfs3(child, vertex);
+    }
+}
+
+
+
 
 int main(){
     FASTER
@@ -117,8 +128,31 @@ int main(){
         cout<<depth[i]<<" "<<height[i]<<nl;
     }
     */
+    
+    /*
     dfs2(1);  // precomputation for subtreeSum & evnCnt
     for(int i=1; i<=n; i++){
         cout<<subtreeSum[i]<<" "<<evnCnt[i]<<nl;
     }
+    */
+
+    
+    // Find the diameter of a tree
+    dfs3(1);
+    ll mx_depth = -1;
+    ll mx_depth_node;
+    for(int i=1; i<=n; i++){
+        if(mx_depth<depth[i]){
+            mx_depth = depth[i];
+            mx_depth_node = i;
+        }
+        depth[i] = 0;  // reset for 2nd time dfs
+    }
+    dfs(mx_depth_node);
+    for(int i=1; i<=n; i++){
+        if(mx_depth < depth[i]){
+            mx_depth = depth[i];
+        }
+    }
+    cout<<mx_depth<<nl;
 }
