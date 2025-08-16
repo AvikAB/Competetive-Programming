@@ -76,6 +76,26 @@ void dfs3(ll vertex, ll par=-1){
     }
 }
 
+// Lowest common ancestor (LCA):
+ll parent[N];
+void dfsTree(ll vertex, ll par=-1){
+    parent[vertex] = par;
+    for(ll child:adjList[vertex]){
+        if(child==par) continue;
+        dfsTree(child, vertex);
+    }
+}
+
+vector<ll>path(ll v){   // this will store the path
+    vector<ll>ans;
+    while(v!=-1){  // in dfsTree root node was -1
+        ans.push_back(v);
+        v = parent[v];
+    }
+    reverse(ans.begin(), ans.end());
+    return ans;
+}
+
 
 
 
@@ -92,7 +112,7 @@ int main(){
     }
 
     // cycle detection:
-    /*bool isCycle = false;
+    bool isCycle = false;
     for(int i=1; i<=n; i++){
         if(!vis[i]){
             if(dfs(i, 0)){
@@ -101,25 +121,25 @@ int main(){
             }
         }
     }
-    cout<<isCycle<<nl;*/
+    cout<<isCycle<<nl;
 
     // component count:
-    /*ll cnt = 0;
+    ll cnt = 0;
     for(int i=1; i<=n; i++){
         if(!vis[i]){
             dfs(i, 0);
             cnt++;
         } else continue;
     }
-    cout<<cnt<<nl;*/
-    // for(int i=1; i<=n; i++){
-    //     if(!vis[i]){
-    //         cout<<"Starting at: "<<i<<nl;
-    //         dfs(i);
-    //     }
-    // }
+    cout<<cnt<<nl;
+    for(int i=1; i<=n; i++){
+        if(!vis[i]){
+            cout<<"Starting at: "<<i<<nl;
+            dfs(i);
+        }
+    }
     
-    /*
+    
     cout<<"start ->"<<" ";
     dfsTraverse(1);
     cout<<nl;
@@ -127,14 +147,11 @@ int main(){
     for(int i=1; i<=n; i++){
         cout<<depth[i]<<" "<<height[i]<<nl;
     }
-    */
     
-    /*
     dfs2(1);  // precomputation for subtreeSum & evnCnt
     for(int i=1; i<=n; i++){
         cout<<subtreeSum[i]<<" "<<evnCnt[i]<<nl;
     }
-    */
 
     
     // Find the diameter of a tree
@@ -155,4 +172,18 @@ int main(){
         }
     }
     cout<<mx_depth<<nl;
+
+    // Lowest common ancestor (LCA):
+    dfsTree(1);
+    ll x,y;
+    cin>>x>>y;
+    vector<ll> path_x = path(x);
+    vector<ll> path_y = path(y);
+    ll mnLen = min(path_x.size(), path_y.size());
+    ll lca = -1;
+    for(int i=0; i<mnLen; i++){
+        if(path_x[i]==path_y[i]) lca = path_x[i];
+        else break;
+    }
+    cout<<lca<<nl;
 }
