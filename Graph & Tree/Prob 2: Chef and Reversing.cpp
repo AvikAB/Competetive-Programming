@@ -27,7 +27,7 @@ ll bfs(){
         for(auto child:adjList[curr_v]){
             ll child_v = child.first;
             ll wt = child.second;
-            if(lvl[child_v] == -1 or lvl[curr_v]+wt < lvl[curr_v]){
+            if(lvl[child_v] == -1 or lvl[curr_v]+wt < lvl[child_v]){
                 lvl[child_v] = lvl[curr_v]+wt;
                 if(wt==0) dq.push_front(child_v);
                 else dq.push_back(child_v);
