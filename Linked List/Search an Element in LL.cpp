@@ -37,16 +37,6 @@ Node* convertArr2LL(vector<ll>&arr){
     return head;
 }
 
-ll LengthLL(Node* head){
-    ll cnt = 0;
-    Node* temp = head;
-    while(temp){
-        temp = temp -> next;
-        cnt++;
-    }
-    return cnt;
-}
-
 bool checkIfPresent(Node* head, ll val){
     Node* temp = head;
     while(temp){
