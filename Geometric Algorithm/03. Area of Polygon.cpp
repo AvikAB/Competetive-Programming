@@ -64,7 +64,7 @@ int main(){
     for(int i=0; i<n; i++){
         ll x1 = points[i].first, y1 = points[i].second;
         ll x2 = points[(i+1)%n].first, y2 = points[(i+1)%n].second;
-        ans += ((x1*y2)-(y1*x2));
+        ans += ((x1*y2)-(y1*x2));    // it gives 2*area
     }
     cout<<abs(ans)<<nl;
 }
