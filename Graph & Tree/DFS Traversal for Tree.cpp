@@ -18,7 +18,7 @@ vector<ll> adjList[N];
 
 void dfs(ll vertex, ll par=0){
     for(ll child:adjList[vertex]){
-        if(child==par) continue;   // its comes from parent then don't do bfs again on parent if they are equal
+        if(child==par) continue;   // its comes from parent then don't do dfs again on parent if they are equal
         dfs(child, vertex);
     }
 }
