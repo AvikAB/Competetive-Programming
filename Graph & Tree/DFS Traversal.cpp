@@ -38,7 +38,7 @@ int main(){
         ll u,v;
         cin>>u>>v;
         adjList[u].push_back(v);
-        adjList[v].push_back(u);
+        adjList[v].push_back(u);  // if this is removed then it will be directed graph (direction is u to v)
     }
 
     dfs(1);
