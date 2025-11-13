@@ -73,3 +73,41 @@ int main(){
 }
 
 // TC: O(n+m)
+
+// Problem about this:
+// Statements: Given string S, find its smallest repeating pattern.
+
+#include <bits/stdc++.h>
+using namespace std;
+
+vector<int> computeLPS(string s) {
+    int n = s.length();
+    vector<int> lps(n, 0);
+    int len = 0, i = 1;
+    while (i < n) {
+        if (s[i] == s[len]) {
+            len++;
+            lps[i] = len;
+            i++;
+        } else {
+            if (len != 0) len = lps[len - 1];
+            else { lps[i] = 0; i++; }
+        }
+    }
+    return lps;
+}
+
+int main() {
+    string s;
+    cin >> s;
+    int n = s.length();
+    vector<int> lps = computeLPS(s);
+    
+    int period = n - lps[n - 1];
+    if (n % period == 0) {
+        cout << "Smallest pattern: " << s.substr(0, period) << "\n";
+        cout << "Repeats: " << n / period << " times\n";
+    } else {
+        cout << "No compression possible\n";
+    }
+}
