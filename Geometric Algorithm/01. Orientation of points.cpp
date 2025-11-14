@@ -1,6 +1,6 @@
 // Problem: Given 3 points (a,b,c) in 2D space. Find out orientation (colinear, clockwise, anti-clockwise) of points a,b,c.
 
-// CSES Poin Location Test: https://cses.fi/problemset/task/2190
+// CSES Point Location Test: https://cses.fi/problemset/task/2190
 
 #include<bits/stdc++.h>
 #include<ext/pb_ds/assoc_container.hpp>
@@ -36,7 +36,7 @@ int main(){
 /*
 The formula is: slope of ab - slope of bc = (y2-y1)/(x2-x1) - (y3-y2)/(x3-x2)
                                           = (y2-y1)*(x3-x2) - (y3-y2)*(x2-x1)
-If that val < 0 -> Anti-Clockwise
-If that val > 0 -> Clockwise
+If that val < 0 -> Anti-Clockwise (left)
+If that val > 0 -> Clockwise (right)
 If that val = 0 -> Co-linear
 */
