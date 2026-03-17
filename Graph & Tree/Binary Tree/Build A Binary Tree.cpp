@@ -1,4 +1,4 @@
-// Binary Tree
+// Binary Tree creation from a user input:
 
 #include<bits/stdc++.h>
 #include<ext/pb_ds/assoc_container.hpp>
