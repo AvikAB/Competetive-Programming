@@ -28,7 +28,7 @@ public:
 };
 
 void PreOrder(Node *root){
-    if(root==NULL) return;
+    if(root==NULL) return;  // Base Case: End of branch
     // NLR
     cout<<root->data<<" ";   // visit root
     PreOrder(root->left);    // visit left
