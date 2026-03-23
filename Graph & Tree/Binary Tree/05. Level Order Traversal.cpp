@@ -49,7 +49,6 @@ void levelOrder(Node* root){
             q.push(current->right);
         }
     }
-    cout<<nl;
 }
 
 int main(){
