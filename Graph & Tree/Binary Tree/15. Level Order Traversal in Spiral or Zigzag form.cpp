@@ -1,3 +1,5 @@
+// Binary Tree
+
 #include<bits/stdc++.h>
 #include<ext/pb_ds/assoc_container.hpp>
 #include<ext/pb_ds/tree_policy.hpp>
@@ -26,6 +28,8 @@ public:
 };
 
 vector<ll>spiral(Node* root){
+    if(!root) return {};
+    
     stack<Node*>RL;
     stack<Node*>LR;
     RL.push(root);
@@ -95,6 +99,3 @@ int main(){
     }
     cout<<nl;
 }
-
-
-// TC: O(n)
