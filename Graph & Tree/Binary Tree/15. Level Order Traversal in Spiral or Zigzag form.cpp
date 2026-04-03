@@ -97,3 +97,6 @@ int main(){
     }
     cout<<nl;
 }
+
+// TC: O(n)
+// When it says the zigzag form, then it always starts from left to right and then right to left and so on in alternative way. Then the code will be LR process first, RL process second.
