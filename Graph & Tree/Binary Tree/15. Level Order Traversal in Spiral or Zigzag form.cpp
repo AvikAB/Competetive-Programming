@@ -99,4 +99,72 @@ int main(){
 }
 
 // TC: O(n)
-// When it says the zigzag form, then it always starts from left to right and then right to left and so on in alternative way. Then the code will be LR process first, RL process second.
+// When it says the zigzag form, then it always starts from left to right and then right to left and so on in alternative way. Then in RL process, Left first then Right and then LR process, Right first and then left.
+vector<ll> spiral(Node* root){
+    if(!root) return {};
+    
+    stack<Node*> RL;  // Stack for Right to Left levels
+    stack<Node*> LR;  // Stack for Left to Right levels
+    RL.push(root);
+    vector<ll> ans;
+    
+    while(!RL.empty() or !LR.empty()){
+        // Process RL stack
+        while(!RL.empty()){
+            Node* curr = RL.top();
+            RL.pop();
+            ans.push_back(curr->data);
+            
+            // Push to LR: left first, then right
+            // This will make next level print Right to Left
+            if(curr->left) LR.push(curr->left);
+            if(curr->right) LR.push(curr->right);
+        }
+        
+        // Process LR stack
+        while(!LR.empty()){
+            Node* curr = LR.top();
+            LR.pop();
+            ans.push_back(curr->data);
+            
+            // Push to RL: right first, then left
+            // This will make next level print Left to Right
+            if(curr->right) RL.push(curr->right);
+            if(curr->left) RL.push(curr->left);
+        }
+    }
+    return ans;
+}
+
+// Code using a queue and flagged variable
+vector<ll> spiral(Node* root){
+    vector<ll>ans;
+    if(!root) return ans;
+    
+    queue<Node*>q;
+    q.push(root);
+    bool LR = true;
+    
+    while(!q.empty()){
+        ll sz = q.size();
+        vector<ll>level(sz);
+        
+        for(int i=0; i<sz; i++){
+            Node* curr = q.front();
+            q.pop();
+            
+            ll idx = LR ? i : (sz-1-i);
+            level[sz] = curr->data;
+            
+            if(curr->left) q.push(curr->left);
+            if(curr->right) q.push(curr->right);
+        }
+        
+        for(ll av:level) {
+            ans.push_back(av);
+        }
+        
+        LR = !LR;
+    }
+    return ans;
+}
