@@ -1,5 +1,3 @@
-// Binary Tree
-
 #include<bits/stdc++.h>
 #include<ext/pb_ds/assoc_container.hpp>
 #include<ext/pb_ds/tree_policy.hpp>
@@ -133,7 +131,7 @@ vector<int>levelOrder(Node* root){
     Node *curr;
 
     while(!q.empty()){
-        curr = q.front();
+        Node* curr = q.front();
         q.pop();
 
         ans.push_back(curr->data);
