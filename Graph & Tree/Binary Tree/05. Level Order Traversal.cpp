@@ -131,7 +131,7 @@ vector<int>levelOrder(Node* root){
     Node *curr;
 
     while(!q.empty()){
-        Node* curr = q.front();
+        curr = q.front();
         q.pop();
 
         ans.push_back(curr->data);
@@ -179,4 +179,24 @@ int main(){
         cout<<av<<" ";
     }
     cout<<nl;
+}
+
+
+// Level by level traverse using for loop:
+vector<ll> levelOrder(Node* root){
+    vector<ll> ans;
+    if(root == NULL) return ans;
+    queue<Node*> q;
+    q.push(root);
+    while(!q.empty()){
+        ll levelSize = q.size();  // Number of nodes at current level
+        for(int i=0; i<levelSize; i++){
+            Node* curr = q.front();
+            q.pop();
+            ans.push_back(curr->data);
+            if(curr->left) q.push(curr->left);
+            if(curr->right) q.push(curr->right);
+        }
+    }
+    return ans;
 }
