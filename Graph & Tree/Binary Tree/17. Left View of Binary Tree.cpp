@@ -1,5 +1,7 @@
 // Left View of Binary Tree:
 
+// Method 1: Using Queue
+
 #include<bits/stdc++.h>
 #include<ext/pb_ds/assoc_container.hpp>
 #include<ext/pb_ds/tree_policy.hpp>
@@ -28,9 +30,11 @@ public:
 };
 
 vector<ll> leftView(Node* root){   // level order traversal
+    vector<ll>ans;
+    if(!root) return ans;
+    
     queue<Node*>q;
     q.push(root);
-    vector<ll>ans;
     while(!q.empty()){
         ll lvlsz = q.size();
         ans.push_back(q.front()->data);
