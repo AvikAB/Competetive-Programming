@@ -64,10 +64,9 @@ bool isCousin(Node* root, ll a, ll b){
     }
 
     // If both found at same level, check if they have different parents
-    if(l1 != -1 && l2 != -1 && l1 == l2){
+    if(l1!=-1 and l2!=-1 and l1==l2){
         return !sameParent(root, a, b);  // if a,b has same parent (return 1) then they are not cousin that why ! here, it turns (return 0)
     }
-
     return false;  
 }
 
