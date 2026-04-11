@@ -1,3 +1,5 @@
+// Method 1: Using Queue
+
 #include<bits/stdc++.h>
 #include<ext/pb_ds/assoc_container.hpp>
 #include<ext/pb_ds/tree_policy.hpp>
@@ -48,6 +50,104 @@ vector<ll>topView(Node* root){
     
     for(auto &ele:m){
         ans.push_back(ele.second);
+    }
+    return ans;
+}
+
+int main(){
+    ll x, first, second;   // root, left val, right val
+    cout<<"Enter root value: ";
+    cin>>x;
+    queue<Node*>q;   // queue stores node's pointers
+    Node *root = new Node(x);    // creating a root node of x
+    q.push(root);
+
+    // build the binary tree
+    while(!q.empty()){
+        Node *temp = q.front();
+        q.pop();
+
+        // left node:
+        cout<<"Enter left child of "<<temp->data<<": ";
+        cin>>first;   // val of left node
+        if(first!=-1){
+            temp->left = new Node(first);   // creating a new node of left & the value is first
+            q.push(temp->left);      // push the val into queue
+        }
+
+        // right node:
+        cout<<"Enter right child of "<<temp->data<<": ";
+        cin>>second;
+        if(second!=-1){
+            temp->right = new Node(second);    // creating a new node of right & the value is second
+            q.push(temp->right);    // push the val into queue
+        }
+    }
+    cout<<"Tree Successfully Created!"<<nl;
+
+    vector<ll> ans = topView(root);
+    for(auto &av:ans){
+        cout<<av<<" ";
+    }
+    cout<<nl;
+}
+
+
+// TC: O(n)
+// SC: O(n)
+
+
+// Method 2: Recursive way
+
+#include<bits/stdc++.h>
+#include<ext/pb_ds/assoc_container.hpp>
+#include<ext/pb_ds/tree_policy.hpp>
+using namespace std;
+using namespace __gnu_pbds;
+
+#define ll long long
+#define nl "\n"
+#define FASTER ios_base::sync_with_stdio(0); cin.tie(0); cout.tie(0);
+template <typename T> using ordered_set = tree<T,null_type, less<T>, rb_tree_tag, tree_order_statistics_node_update>;
+
+const ll N = 1e5+10;
+const ll mod = 1e9+7;
+const ll INF = 1e9+10;
+
+class Node {
+public:
+    ll data;
+    Node *left, *right ;   // pointer of left, right
+
+    // Constructor to initialize the node with a value
+    Node(int val){
+        data = val;
+        left = right = NULL;
+    }
+};
+
+void Tview(Node* root, ll col, ll level, map<ll,pair<ll,ll>>&m){
+    if(!root) return;
+
+    // If this column is not seen or we found a node at higher level (smaller level number, level 0 is higher, then level 1)
+    if(m.find(col)==m.end() or level<m[col].second){
+        m[col] = {root->data, level};
+    }
+
+    Tview(root->left, col-1, level+1, m);
+    Tview(root->right, col+1, level+1, m);
+}
+
+vector<ll>topView(Node* root){
+    vector<ll>ans;
+    if(!root) return ans;
+
+    map<ll,pair<ll,ll>>m;  // {column_no, {node_val, level}}
+
+    Tview(root, 0, 0, m);
+
+    for(auto &ele:m){
+        ans.push_back(ele.second.first);  // will work with the first of pair, which is node_val
     }
     return ans;
 }
