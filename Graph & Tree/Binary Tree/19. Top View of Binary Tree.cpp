@@ -190,6 +190,7 @@ int main(){
     cout<<nl;
 }
 
+// There is less chance to get this (level < m[col].second) condition being true
 
 // TC: O(n)
 // SC: O(n)
