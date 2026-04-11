@@ -45,6 +45,7 @@ vector<ll>topView(Node* root){
         if(temp->left) q.push({temp->left, col-1});
         if(temp->right) q.push({temp->right, col+1});
     }
+    
     for(auto &ele:m){
         ans.push_back(ele.second);
     }
