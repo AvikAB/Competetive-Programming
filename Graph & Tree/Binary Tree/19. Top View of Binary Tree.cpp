@@ -38,7 +38,7 @@ vector<ll>topView(Node* root){
         ll col = q.front().second;
         q.pop();
 
-        if(m.find(col)==m.end()){   // Only insert if this column hasn't been seen, if this col hasn't been seen before store the current node's value. If its already seen, iognore.
+        if(m.find(col)==m.end()){   // Only insert if this column hasn't been seen, if this col hasn't been seen before, store the current node's value. If its already seen, ignore.
             m[col] = temp->data;
         }
 
