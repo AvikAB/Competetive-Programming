@@ -1,4 +1,4 @@
-// Method 1: (using mathematical expression of idx+(pos-InSt)+1 of Preorder for right subtree)
+// Approach 1: (using mathematical expression of idx+(pos-InSt)+1 of Preorder for right subtree)
 
 #include<bits/stdc++.h>
 #include<ext/pb_ds/assoc_container.hpp>
@@ -113,4 +113,36 @@ Enter inorder traversal: 9 3 15 20 7
 Level Order Traversal (Output): 3, 9, 20, null, null, 15, 7
 */
 
-// Method 2: 
+// In Approach 1: In a single call, It will call Left & right together.
+
+// Approach 2: (idx by reference)
+// All will be same just changes in Tree():
+Node* Tree(vector<ll>&inorder, vector<ll>&preorder, ll InSt, ll InEnd, ll &idx){
+    if(InSt>InEnd) return NULL;  // base case
+
+    Node *root = new Node(preorder[idx]);   // create a new root using preorder[idx] val
+    ll pos = find(inorder, preorder[idx], InSt, InEnd);
+    idx++;
+    
+    // Build left tree
+    root->left = Tree(inorder, preorder, InSt, pos-1, idx);
+    // Build right tree
+    root->right = Tree(inorder, preorder, pos+1, InEnd, idx);
+    return root;
+}
+
+/*
+Why idx + (pos - InSt) + 1?
+    1. (pos - InSt) = number of nodes in left subtree (leftSize)
+    2. Need to skip: current root (1) + entire left subtree (leftSize)
+    3. So index = idx + 1 + leftSize = idx + leftSize + 1
+*/
+
+/*
+In Approach 2: In a single call, it will going to left subtree first by the given range [InSt, pos-1].
+               After that it will go to right subtree by the given range [pos+1, InEnd].
+*/
+
+// It takes O(n^2) time comp for the find function.
+
+// Approach 3: O(n) Approach using multiset
