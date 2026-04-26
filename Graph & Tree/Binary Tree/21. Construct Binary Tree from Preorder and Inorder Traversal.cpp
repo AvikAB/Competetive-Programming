@@ -145,4 +145,29 @@ In Approach 2: In a single call, it will going to left subtree first by the give
 
 // It takes O(n^2) time comp for the find function.
 
-// Approach 3: O(n) Approach using multiset
+// Approach 3: O(n) Approach using hashmap:
+class Solution {
+    unordered_map<int,int> inorderMap;  // val -> index mapping
+    
+    Node* Tree(vector<int>& preorder, int InSt, int InEnd, int &idx){
+        if(InSt>InEnd) return NULL;
+        
+        Node *root = new Node(preorder[idx]);
+        int pos = inorderMap[preorder[idx]];
+        idx++;
+        
+        root->left = Tree(preorder, InSt, pos-1, idx);
+        root->right = Tree(preorder, pos+1, InEnd, idx);
+        
+        return root;
+    }
+    
+public:
+    Node *buildTree(vector<int>& inorder, vector<int>& preorder) {
+        for(int i=0; i<inorder.size(); i++) {
+            inorderMap[inorder[i]] = i;
+        }
+        int preorderIndex = 0;
+        return Tree(preorder, 0, inorder.size()-1, preorderIndex);
+    }
+};
