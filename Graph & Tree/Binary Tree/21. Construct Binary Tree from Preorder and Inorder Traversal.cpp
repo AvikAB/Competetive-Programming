@@ -103,3 +103,14 @@ int main(){
 
 // TC: O(n^2)
 // SC: O(n)
+
+/*
+Sample runs & Output:
+
+Enter number of nodes: 5
+Enter preorder traversal: 3 9 20 15 7
+Enter inorder traversal: 9 3 15 20 7
+Level Order Traversal (Output): 3, 9, 20, null, null, 15, 7
+*/
+
+// Method 2: 
