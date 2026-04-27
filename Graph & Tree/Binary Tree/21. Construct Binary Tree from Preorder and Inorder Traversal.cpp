@@ -139,8 +139,8 @@ Why idx + (pos - InSt) + 1?
 */
 
 /*
-In Approach 2: In a single call, it will going to left subtree first by the given range [InSt, pos-1].
-               After that it will go to right subtree by the given range [pos+1, InEnd].
+In Approach 2: In a single call, it will going to all left subtree first by the given range [InSt, pos-1].
+               After that it will go to all right subtree by the given range [pos+1, InEnd].
 */
 
 // It takes O(n^2) time comp for the find function.
