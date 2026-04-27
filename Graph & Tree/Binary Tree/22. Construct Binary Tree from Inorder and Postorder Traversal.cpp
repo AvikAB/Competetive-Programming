@@ -49,7 +49,7 @@ Node* Tree(vector<ll>&inorder, vector<ll>&postorder, ll InSt, ll InEnd, ll idx){
 
 vector<ll> levelOrder(Node* root){
     vector<ll> ans;
-    if(root == NULL) return ans;
+    if(root==NULL) return ans;
 
     queue<Node*> q;
     q.push(root);
@@ -68,7 +68,7 @@ vector<ll> levelOrder(Node* root){
     }
 
     // remove trailing nulls
-    while(!ans.empty() && ans.back() == -1){
+    while(!ans.empty() and ans.back()==-1){
         ans.pop_back();
     }
     return ans;
@@ -100,4 +100,7 @@ int main(){
 // SC: O(n)
 
 
-// Approach 2: Using hashmap [TC: O(n)]
+// Approach 2: idx pass by reference
+
+
+// Approach 3: Using hashmap [TC: O(n)]
