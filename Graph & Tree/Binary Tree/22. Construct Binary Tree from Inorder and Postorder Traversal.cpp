@@ -101,6 +101,71 @@ int main(){
 
 
 // Approach 2: idx pass by reference
+// Just change in Tree() where just do idx-- and call for left & right using idx and chaneg in main(), just doing a variable and call it by variable
+Node* Tree(vector<ll>&inorder, vector<ll>&postorder, ll InSt, ll InEnd, ll &idx){
+    if(InSt>InEnd) return NULL;   // base case
+    
+    Node* root = new Node(postorder[idx]);
+    ll pos = find(inorder, postorder[idx], InSt, InEnd);
+    idx--;
+
+    // build right first
+    root->right = Tree(inorder, postorder, pos+1, InEnd, idx);
+    // then left
+    root->left  = Tree(inorder, postorder, InSt, pos-1, idx);
+
+    return root;
+}
+
+int main(){
+    ll n;
+    cout<<"Enter number of nodes: ";
+    cin >> n;
+    vector<ll> postorder(n), inorder(n);
+    cout<<"Enter inorder traversal: ";
+    for(int i=0; i<n; i++) cin>>inorder[i];
+
+    cout<<"Enter postorder traversal: ";
+    for(int i=0; i<n; i++) cin>>postorder[i];
+    
+    ll idx = n-1;
+    Node* root = Tree(inorder, postorder, 0, n-1, idx);
+
+    vector<ll> level=levelOrder(root);
+
+    cout<<"Level Order Traversal (Output): ";
+    for(int i=0; i<level.size(); i++){
+        if(level[i]==-1) cout<< "null, ";
+        else cout<<level[i]<<", ";
+    }
+}
 
 
 // Approach 3: Using hashmap [TC: O(n)]
+class Solution {
+  public:
+    unordered_map<int,int> InorderMap;
+    
+    TreeNode* Tree(vector<int> &inorder, vector<int> &postorder, int InSt, int InEnd, int &idx){
+        if(InSt>InEnd) return NULL;
+        
+        TreeNode* root = new TreeNode(postorder[idx]);
+        int pos = InorderMap[postorder[idx]];
+        idx--;    // move backward for postorder
+        
+        // Right:
+        root->right = Tree(inorder, postorder, pos+1, InEnd, idx);
+        // left:
+        root->left = Tree(inorder, postorder, InSt, pos-1, idx);
+        return root;
+    }
+    
+    TreeNode *buildTree(vector<int> &inorder, vector<int> &postorder) {
+        for(int i=0; i<inorder.size(); i++){
+            InorderMap[inorder[i]] = i;
+        }
+
+        int postOidx = postorder.size()-1;
+        return Tree(inorder, postorder, 0, inorder.size()-1, postOidx);
+    }
+};
