@@ -47,9 +47,9 @@ vector<ll>verticalOrder(Node* root){
     idx.push(0);
 
     while(!q.empty()){
-        Node* curr = q.front();  // root
+        Node* curr = q.front();
         q.pop();
-        ll pos = idx.front();  // 0
+        ll pos = idx.front();
         idx.pop();
         if(pos>=0) positive[pos].push_back(curr->data);
         else negative[abs(pos)].push_back(curr->data);
@@ -121,4 +121,47 @@ int main(){
 
 
 // TC: O(n)
+// SC: O(n)
+
+// Method 2: Using map
+class Solution {
+public:
+    vector<vector<ll>> verticalTraversal(Node* root) {
+        map<ll, map<ll, multiset<ll>>> nodes;
+        queue<pair<Node*, pair<ll, ll>>> q;  // this is for BFS (level order traversal)
+        q.push({root, {0, 0}});
+        
+        while(!q.empty()) {
+            auto p = q.front();
+            q.pop();
+            Node* curr = p.first;  // node
+            ll vertical_line = p.second.first;  // col
+            ll level = p.second.second;  // row
+            
+            nodes[vertical_line][level].insert(curr->data);
+
+            if(curr->left) {
+                q.push({curr->left, {vertical_line - 1, level + 1}});
+            }
+            if(curr->right) {
+                q.push({curr->right, {vertical_line + 1, level + 1}});
+            }
+        }
+        
+        vector<vector<ll>> ans;
+        for(auto line_entry : nodes) {
+            vector<ll> vertical_nodes;
+            // for each level in this vertical line from top to bottom
+            for(auto level_entry : line_entry.second) {
+                // add all vals at this (vertical_line, level) position
+                vertical_nodes.insert(vertical_nodes.end(), level_entry.second.begin(), level_entry.second.end());
+            }
+            // add this vertical line to final ans
+            ans.push_back(vertical_nodes);
+        }
+        return ans;
+    }
+};
+
+// TC: O(nlogn)
 // SC: O(n)
