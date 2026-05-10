@@ -27,7 +27,7 @@ public:
 };
 
 ll find(Node* root, ll pos, ll &l){
-    if(!root) return 0;   // base case
+    if(!root) return l;   // base case
     l = max(l, pos);
     find(root->left, pos+1, l);  // need left subtree so that increase it when it get left subtree
     find(root->right, pos, l);
