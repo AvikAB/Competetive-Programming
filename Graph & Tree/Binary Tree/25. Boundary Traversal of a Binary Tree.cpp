@@ -50,7 +50,7 @@ void addLeaf(Node* root, vector<ll>&ans){
         return;
     }
 
-    // recursively traverse left & right
+    // recursively traverse left & right if they are not leaf
     addLeaf(root->left, ans);
     addLeaf(root->right, ans);
 }
