@@ -101,4 +101,29 @@ int main(){
 // SC: O(n)
 
 
-// Method 2: 
+// Method 2: Optiaml way
+vector<ll>diagonalOrder(Node* root){
+    if(!root) return {};
+    
+    vector<ll>result;
+    queue<Node*>q;
+    q.push(root);
+    
+    while(!q.empty()){
+        Node* curr = q.front();
+        q.pop();
+        
+        // Process all nodes in current diagonal
+        while(curr){
+            result.push_back(curr->data);
+            // If left child exists, it belongs to next diagonal
+            if(curr->left){
+                q.push(curr->left);
+            }
+            
+            // Move to right child in same diagonal
+            curr = curr->right;
+        }
+    }
+    return result;
+}
