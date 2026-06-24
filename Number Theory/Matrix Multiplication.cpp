@@ -17,21 +17,21 @@ ll ar[N][N], I[N][N];   // identity matrix (result)
 
 void mul(ll A[N][N], ll B[N][N], ll n){
     // matrix multiplication here
-    ll res[N][N] = {0};
+    ll temp[N][N] = {0};
     // A*B
     for(int i=1; i<=n; i++){   // row of matrix A
-        for(int k=1; k<=n; k++){
+        for(int k=1; k<=n; k++){  // k = middle idx, when its 1st row of A then its 1st col of B and so on
             if(A[i][k]==0) continue;
             for(int j=1; j<=n; j++){   // col of mat B
-                res[i][j] += (A[i][k] * B[k][j]) % mod;
+                temp[i][j] += (A[i][k] * B[k][j]) % mod;
             }
         }
     }
 
-    // shift the res mat to main mat
+    // shift the temp mat to main mat
     for(int i=1; i<=n; i++){
         for(int j=1; j<=n; j++){
-            A[i][j] = res[i][j];
+            A[i][j] = temp[i][j];
         }
     }
 }
