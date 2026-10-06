@@ -86,4 +86,17 @@ Thats why we do mp[s[i]]++, if(mp[s[i]]==1) cnt++; for removing the s[i] from th
 
 TC: O(n+k)
 SC: O(1)
+
+Steps:
+    1. Count frequencies of pattern p in a map → mp[char] = need.
+    2. Set cnt = number of distinct chars in p (unsatisfied count).
+    3. Set k = length of p (window size).
+    4. Loop with two pointers i (left) and j (right):
+        Add s[j]: decrement its need; if need hits 0, cnt--.
+        If window < k → expand (j++).
+        If window == k:
+            If cnt == 0 → anagram found, ans++.
+            Remove s[i]: increment its need; if need becomes 1, cnt++.
+            Slide → i++, j++.
+    5. Return ans.
 */
