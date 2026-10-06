@@ -27,7 +27,7 @@ ll cntOcc(string s, string p){
     ll i=0, j=0;
 
     while(j<s.size()){
-        // calculation part (if char is exist then dec the char freq and cnt), add s[j] and its calculation 
+        // calculation part (if char is exist then dec the char freq and cnt), add s[j] and its calculation to the window
         // calculation means which char in next, how many new distinct char in the window
 
         if(mp.find(s[j])!=mp.end()){   // s[j] is exist
