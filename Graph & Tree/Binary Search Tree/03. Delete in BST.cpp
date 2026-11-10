@@ -44,7 +44,7 @@ Node* deleteNode(Node* root, int x){
     } else if(root->data < x){   // go to right side
         root->right = deleteNode(root->right, x);
         return root;
-    } else {   // root->data==x, find the x node
+    } else {   // root->data==x, found the x node
         // C1: leaf node
         if(!root->left and !root->right){
             delete root;
