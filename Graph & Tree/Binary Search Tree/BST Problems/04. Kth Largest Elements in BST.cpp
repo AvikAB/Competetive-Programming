@@ -25,3 +25,11 @@ class Solution {
         return ans;
     }
 };
+
+
+
+/*
+TC: O(logn + k) [Balanced BST], O(n) [Skewed BST]
+SC: O(logn) [Balanced BST], O(n) [Skewed BST]
+n = num of nodes
+*/
