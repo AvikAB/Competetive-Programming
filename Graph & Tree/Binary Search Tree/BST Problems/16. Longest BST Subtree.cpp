@@ -91,13 +91,14 @@ SC: O(h), O(log n) for balanced tree, O(n) for skewed tree
 
 
 // Easy way of this:
+
 class Box{
     public:
     bool isBST;
     int size;
     int mn, mx;
     // constructor
-    Box(int data){
+    Box(){
         isBST = 1;  // initial is all are BST then it enter & checking for isBST
         size = 0;
         // MAX & MIN for if child are present then just update it
