@@ -31,8 +31,40 @@ Solution: Iterative Approach.
   than the memory's stack area. It easily handles large num of inputs.
 
 Thats why Iterative approach is must needed sometimes when constraints are high and tree can be skewed.
-If it syas balanced tree will given then recursion is ok.
+If it says balanced tree will given then recursion is ok.
   */
 
 
 // AC: Iterative Approach:
+
+bool canRepresentBST(vector<int> &arr) {
+    int n = arr.size();
+    stack<int>lower, upper;
+    lower.push(INT_MIN);
+    upper.push(INT_MAX);
+    int leftR, rightR;   // range [leftRange, rightRange]
+    for(int i=0; i<n; i++){
+        // 1. less than lower, out of range
+        if(arr[i]<lower.top()) return 0;    // bc
+            
+        // 2. greater than upper, out of range, make it in range
+        while(arr[i]>upper.top()){
+            upper.pop();
+            lower.pop();
+        }
+            
+        // 3. ele lies in the range
+        leftR = lower.top();
+        rightR = upper.top();
+        lower.pop();
+        upper.pop();
+        // Add new range for the curr ele's (arr[i]) left subtree & right subtree
+        // Add right subtrees's range
+        lower.push(arr[i]);
+        upper.push(rightR);
+        // Add left subtree's range
+        lower.push(leftR);
+        upper.push(arr[i]);
+    }
+    return 1;
+}
